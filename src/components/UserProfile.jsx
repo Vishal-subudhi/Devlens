@@ -12,7 +12,7 @@ function UserProfile({
   ]
 
   return (
-    <div className="glow-border bg-card p-6 mb-6">
+    <div className="glow-border bg-card p-6">
       <div className="flex items-start gap-6">
         <div className="relative flex-shrink-0">
           <img

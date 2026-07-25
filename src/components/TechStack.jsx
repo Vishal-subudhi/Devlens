@@ -1,7 +1,7 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 import useFilterStore from '../store/filterStore'
 
-const COLORS = ['#4F8EF7', '#00D4FF', '#F59E0B', '#10B981', '#8B5CF6', '#EC4899']
+const EXTRA_COLORS = ['#10B981', '#8B5CF6', '#EC4899']
 
 const CustomTooltip = ({ active, payload, repoCountSuffix }) => {
   if (active && payload && payload.length) {
@@ -17,8 +17,9 @@ const CustomTooltip = ({ active, payload, repoCountSuffix }) => {
 }
 
 
-function TechStack({ repos, techStackHeading, techStackEmptyState, repoCountSuffix }) {
+function TechStack({ repos, techStackHeading, techStackEmptyState, repoCountSuffix, chartColors }) {
     const {selectedLanguage, setLanguage}= useFilterStore()
+    const COLORS = [chartColors.accent, chartColors.cyan, chartColors.amber, ...EXTRA_COLORS]
   const languageCount = repos.reduce((acc, repo) => {
     if (repo.language) {
       acc[repo.language] = (acc[repo.language] || 0) + 1

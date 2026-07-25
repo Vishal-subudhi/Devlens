@@ -8,6 +8,16 @@ import TechStack from './components/TechStack'
 import PopularRepos from './components/PopularRepos'
 import ErrorMessage from './components/ErrorMessage'
 
+const SECTIONS = {
+  profile: (props) => (
+    <div key="profile" className="lg:col-span-2">
+      <UserProfile {...props} />
+    </div>
+  ),
+  techStack: (props) => <TechStack key="techStack" {...props} />,
+  popularRepos: (props) => <PopularRepos key="popularRepos" {...props} />,
+}
+
 function App(){
   const [username, setUsername] = useState('')
   const {user, repos, loading, error, fetchUser}= useGithub()
@@ -28,13 +38,11 @@ function App(){
       {loading && <p className="text-center text-gray-400 mt-8">Loading...</p>}
       {error && <ErrorMessage message={error}/>}
       {user && !loading && (
-        <>
-        <UserProfile user={user} {...settings} />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-          <TechStack repos={repos} {...settings} />
-          <PopularRepos repos={repos} {...settings} />
+          {settings.layout.map((section) =>
+            SECTIONS[section]?.({user, repos, ...settings})
+          )}
         </div>
-        </>
       )}
       </div>
     </div>

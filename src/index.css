@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-base: 10 15 30;
+  --color-surface: 26 34 53;
+  --color-card: 20 28 46;
+  --color-accent: 79 142 247;
+  --color-cyan: 0 212 255;
+  --color-amber: 245 158 11;
+}
+
 * { font-family: 'Inter', sans-serif; }
 .font-mono { font-family: 'JetBrains Mono', monospace; }
 
@@ -14,7 +23,7 @@
   position: absolute;
   inset: -1px;
   border-radius: 17px;
-  background: linear-gradient(135deg, #4F8EF7, #00D4FF, #4F8EF7);
+  background: linear-gradient(135deg, rgb(var(--color-accent)), rgb(var(--color-cyan)), rgb(var(--color-accent)));
   z-index: -1;
   opacity: 0.6;
 }

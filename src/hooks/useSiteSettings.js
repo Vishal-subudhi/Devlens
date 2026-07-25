@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {sanityClient} from '../lib/sanityClient'
+import {applyTheme} from '../lib/theme'
 
 const QUERY = `*[_id == "siteSettings"][0]`
 
@@ -21,6 +22,8 @@ const DEFAULTS = {
   repoCountSuffix: 'repos',
   popularReposHeading: 'Top Repositories',
   popularReposSortLabel: 'sorted by ★',
+  layout: ['profile', 'techStack', 'popularRepos'],
+  chartColors: {accent: '#4F8EF7', cyan: '#00D4FF', amber: '#F59E0B'},
 }
 
 function useSiteSettings() {
@@ -32,7 +35,18 @@ function useSiteSettings() {
     sanityClient
       .fetch(QUERY)
       .then((data) => {
-        if (!cancelled && data) setSettings({...DEFAULTS, ...data})
+        if (cancelled || !data) return
+        const merged = {
+          ...DEFAULTS,
+          ...data,
+          chartColors: {
+            accent: data.accentColor?.hex || DEFAULTS.chartColors.accent,
+            cyan: data.cyanColor?.hex || DEFAULTS.chartColors.cyan,
+            amber: data.amberColor?.hex || DEFAULTS.chartColors.amber,
+          },
+        }
+        setSettings(merged)
+        applyTheme(data)
       })
       .catch((error) => {
         if (!cancelled) console.error('Failed to fetch site settings:', error)

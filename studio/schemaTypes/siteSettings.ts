@@ -1,5 +1,5 @@
 import {icons} from '@sanity/icons'
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const siteSettings = defineType({
   name: 'siteSettings',
@@ -7,6 +7,8 @@ export const siteSettings = defineType({
   type: 'document',
   icon: icons.cog,
   groups: [
+    {name: 'theme', title: 'Theme'},
+    {name: 'layout', title: 'Layout'},
     {name: 'navbar', title: 'Navbar'},
     {name: 'hero', title: 'Hero / Search'},
     {name: 'profile', title: 'Profile Card'},
@@ -14,6 +16,70 @@ export const siteSettings = defineType({
     {name: 'popularRepos', title: 'Popular Repos Card'},
   ],
   fields: [
+    // Theme
+    defineField({
+      name: 'accentColor',
+      title: 'Accent Color',
+      description: 'Primary highlight color — buttons, links, active states',
+      type: 'color',
+      group: 'theme',
+    }),
+    defineField({
+      name: 'cyanColor',
+      title: 'Secondary Accent Color',
+      description: 'Used for the Followers stat and chart highlights',
+      type: 'color',
+      group: 'theme',
+    }),
+    defineField({
+      name: 'amberColor',
+      title: 'Star / Highlight Color',
+      description: 'Used for the star rating on repos',
+      type: 'color',
+      group: 'theme',
+    }),
+    defineField({
+      name: 'baseColor',
+      title: 'Page Background',
+      type: 'color',
+      group: 'theme',
+    }),
+    defineField({
+      name: 'cardColor',
+      title: 'Card Background',
+      type: 'color',
+      group: 'theme',
+    }),
+    defineField({
+      name: 'surfaceColor',
+      title: 'Surface Background',
+      description: 'Inputs, tags, and nested surfaces',
+      type: 'color',
+      group: 'theme',
+    }),
+
+    // Layout
+    defineField({
+      name: 'layout',
+      title: 'Homepage Sections',
+      description: 'Add, remove, and drag to reorder the sections shown after a search',
+      type: 'array',
+      group: 'layout',
+      of: [
+        defineArrayMember({
+          type: 'string',
+          options: {
+            list: [
+              {title: 'Profile Card', value: 'profile'},
+              {title: 'Tech Stack Card', value: 'techStack'},
+              {title: 'Popular Repos Card', value: 'popularRepos'},
+            ],
+          },
+        }),
+      ],
+      validation: (rule) => rule.unique(),
+      initialValue: ['profile', 'techStack', 'popularRepos'],
+    }),
     // Navbar
     defineField({
       name: 'brandPrefix',
