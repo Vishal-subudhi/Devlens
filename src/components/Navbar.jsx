@@ -1,4 +1,4 @@
-function Navbar({ badgeText, navTagline }) {
+function Navbar({ brandPrefix, brandSuffix, badgeText, navTagline }) {
   return (
     <nav className="border-b border-white/5 bg-base/80 backdrop-blur-md
                     sticky top-0 z-50">
@@ -6,9 +6,9 @@ function Navbar({ badgeText, navTagline }) {
                       justify-between">
         <div className="flex items-center gap-2">
           <span className="font-mono text-accent font-bold text-lg
-                           tracking-tight">dev</span>
+                           tracking-tight">{brandPrefix}</span>
           <span className="font-mono text-white font-bold text-lg
-                           tracking-tight">lens</span>
+                           tracking-tight">{brandSuffix}</span>
           <span className="ml-2 text-xs font-mono bg-accent/10 text-accent
                            px-2 py-0.5 rounded border border-accent/20">
             {badgeText}

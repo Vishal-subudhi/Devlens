@@ -1,8 +1,14 @@
-function UserProfile({ user }) {
+function UserProfile({
+  user,
+  statRepoLabel,
+  statFollowersLabel,
+  statFollowingLabel,
+  memberSinceLabel,
+}) {
   const stats = [
-    { label: 'Repos', value: user.public_repos, color: 'text-accent' },
-    { label: 'Followers', value: user.followers, color: 'text-cyan' },
-    { label: 'Following', value: user.following, color: 'text-white/60' },
+    { label: statRepoLabel, value: user.public_repos, color: 'text-accent' },
+    { label: statFollowersLabel, value: user.followers, color: 'text-cyan' },
+    { label: statFollowingLabel, value: user.following, color: 'text-white/60' },
   ]
 
   return (
@@ -29,9 +35,9 @@ function UserProfile({ user }) {
                 @{user.login}
               </a>
             </div>
-            <span className="font-mono text-xs text-white/30 bg-surface 
+            <span className="font-mono text-xs text-white/30 bg-surface
                              px-3 py-1 rounded-lg border border-white/5">
-              Member since {new Date(user.created_at).getFullYear()}
+              {memberSinceLabel} {new Date(user.created_at).getFullYear()}
             </span>
           </div>
           {user.bio && (

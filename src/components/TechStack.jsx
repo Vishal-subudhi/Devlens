@@ -3,13 +3,13 @@ import useFilterStore from '../store/filterStore'
 
 const COLORS = ['#4F8EF7', '#00D4FF', '#F59E0B', '#10B981', '#8B5CF6', '#EC4899']
 
-const CustomTooltip = ({ active, payload }) => {
+const CustomTooltip = ({ active, payload, repoCountSuffix }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-surface border border-white/10 rounded-lg 
+      <div className="bg-surface border border-white/10 rounded-lg
                       px-3 py-2 font-mono text-xs">
         <p className="text-white">{payload[0].name}</p>
-        <p className="text-accent">{payload[0].value} repos</p>
+        <p className="text-accent">{payload[0].value} {repoCountSuffix}</p>
       </div>
     )
   }
@@ -17,7 +17,7 @@ const CustomTooltip = ({ active, payload }) => {
 }
 
 
-function TechStack({ repos }) {
+function TechStack({ repos, techStackHeading, techStackEmptyState, repoCountSuffix }) {
     const {selectedLanguage, setLanguage}= useFilterStore()
   const languageCount = repos.reduce((acc, repo) => {
     if (repo.language) {
@@ -35,7 +35,7 @@ function TechStack({ repos }) {
       <div className="bg-card rounded-2xl border border-white/5 p-6 
                       flex items-center justify-center h-48">
         <p className="font-mono text-white/20 text-sm">
-          No language data
+          {techStackEmptyState}
         </p>
       </div>
     )
@@ -43,9 +43,9 @@ function TechStack({ repos }) {
 
     return (
   <div className="bg-card rounded-2xl border border-white/5 p-6">
-    <h2 className="font-mono text-white font-semibold text-sm 
+    <h2 className="font-mono text-white font-semibold text-sm
                    uppercase tracking-wider mb-4">
-      Language Distribution
+      {techStackHeading}
     </h2>
     {/* Bigger chart centered */}
     <div className="flex justify-center mb-6">
@@ -66,7 +66,7 @@ function TechStack({ repos }) {
               fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip content={<CustomTooltip />} />
+        <Tooltip content={<CustomTooltip repoCountSuffix={repoCountSuffix} />} />
       </PieChart>
     </div>
     {/* Language list below chart */}
@@ -87,7 +87,7 @@ function TechStack({ repos }) {
             {item.name}
           </span>
           <span className="font-mono text-white/30 text-xs">
-            {item.value} repos
+            {item.value} {repoCountSuffix}
           </span>
         </div>
       ))}

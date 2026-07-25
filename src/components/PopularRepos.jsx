@@ -1,8 +1,8 @@
 import useFilterStore from '../store/filterStore'
 
 
-function PopularRepos({ repos }) {
-    
+function PopularRepos({ repos, popularReposHeading, popularReposSortLabel }) {
+
 const {selectedLanguage}= useFilterStore()
 
 const filteredRepos= selectedLanguage === 'All'
@@ -12,9 +12,9 @@ const filteredRepos= selectedLanguage === 'All'
   return (
     <div className="bg-card rounded-2xl border border-white/5 p-6">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-mono text-white font-semibold text-sm 
+        <h2 className="font-mono text-white font-semibold text-sm
                        uppercase tracking-wider">
-          Top Repositories
+          {popularReposHeading}
           {selectedLanguage !=='All' &&(
             <span className="ml-2 text-accent font-mono text-xs">
                 .{selectedLanguage}
@@ -22,7 +22,7 @@ const filteredRepos= selectedLanguage === 'All'
           )}
         </h2>
         <span className="font-mono text-white/30 text-xs">
-          sorted by ★
+          {popularReposSortLabel}
         </span>
       </div>
       <div className="flex flex-col gap-2">

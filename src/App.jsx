@@ -17,25 +17,22 @@ function App(){
 
   return (
     <div className="min-h-screen bg-base text-white">
-      <Navbar badgeText={settings.badgeText} navTagline={settings.navTagline} />
+      <Navbar {...settings} />
     <div className="max-w-6xl mx-auto px-6 py-8">
       <SearchBar
       username={username}
       setUsername={setUsername}
       onSearch={handleSearch}
-      heroTitle={settings.heroTitle}
-      heroSubtitle={settings.heroSubtitle}
-      searchPlaceholder={settings.searchPlaceholder}
-      ctaLabel={settings.ctaLabel}
+      {...settings}
       />
       {loading && <p className="text-center text-gray-400 mt-8">Loading...</p>}
       {error && <ErrorMessage message={error}/>}
       {user && !loading && (
         <>
-        <UserProfile user={user} />
+        <UserProfile user={user} {...settings} />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-          <TechStack repos={repos} />
-          <PopularRepos repos={repos} />
+          <TechStack repos={repos} {...settings} />
+          <PopularRepos repos={repos} {...settings} />
         </div>
         </>
       )}
