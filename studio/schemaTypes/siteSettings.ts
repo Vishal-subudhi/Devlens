@@ -21,6 +21,7 @@ export const siteSettings = defineType({
       description: 'First half of the logo, e.g. "dev"',
       type: 'string',
       group: 'navbar',
+      placeholder: 'dev',
     }),
     defineField({
       name: 'brandSuffix',
@@ -28,6 +29,7 @@ export const siteSettings = defineType({
       description: 'Second half of the logo, e.g. "lens"',
       type: 'string',
       group: 'navbar',
+      placeholder: 'lens',
     }),
     defineField({
       name: 'badgeText',
@@ -35,6 +37,7 @@ export const siteSettings = defineType({
       description: 'Small badge next to the logo, e.g. "v1.0"',
       type: 'string',
       group: 'navbar',
+      placeholder: 'v1.0',
     }),
     defineField({
       name: 'navTagline',
@@ -42,6 +45,7 @@ export const siteSettings = defineType({
       description: 'Right-aligned tagline in the navbar, e.g. "GitHub Analytics"',
       type: 'string',
       group: 'navbar',
+      placeholder: 'GitHub Analytics',
     }),
 
     // Hero / Search
@@ -52,12 +56,14 @@ export const siteSettings = defineType({
       type: 'string',
       validation: (rule) => rule.required(),
       group: 'hero',
+      placeholder: 'Analyse any developer',
     }),
     defineField({
       name: 'heroSubtitle',
       title: 'Hero Subtitle',
       type: 'string',
       group: 'hero',
+      placeholder: 'Enter a GitHub username to inspect their coding DNA',
     }),
     defineField({
       name: 'searchPlaceholder',
@@ -65,12 +71,14 @@ export const siteSettings = defineType({
       description: 'Example username shown in the search box',
       type: 'string',
       group: 'hero',
+      placeholder: 'torvalds',
     }),
     defineField({
       name: 'ctaLabel',
       title: 'Search Button Label',
       type: 'string',
       group: 'hero',
+      placeholder: 'Analyse →',
     }),
 
     // Profile Card
@@ -79,18 +87,21 @@ export const siteSettings = defineType({
       title: 'Repos Stat Label',
       type: 'string',
       group: 'profile',
+      placeholder: 'Repos',
     }),
     defineField({
       name: 'statFollowersLabel',
       title: 'Followers Stat Label',
       type: 'string',
       group: 'profile',
+      placeholder: 'Followers',
     }),
     defineField({
       name: 'statFollowingLabel',
       title: 'Following Stat Label',
       type: 'string',
       group: 'profile',
+      placeholder: 'Following',
     }),
     defineField({
       name: 'memberSinceLabel',
@@ -98,6 +109,7 @@ export const siteSettings = defineType({
       description: 'Shown before the join year, e.g. "Member since"',
       type: 'string',
       group: 'profile',
+      placeholder: 'Member since',
     }),
 
     // Tech Stack Card
@@ -106,6 +118,7 @@ export const siteSettings = defineType({
       title: 'Tech Stack Heading',
       type: 'string',
       group: 'techStack',
+      placeholder: 'Language Distribution',
     }),
     defineField({
       name: 'techStackEmptyState',
@@ -113,6 +126,7 @@ export const siteSettings = defineType({
       description: 'Shown when a profile has no language data',
       type: 'string',
       group: 'techStack',
+      placeholder: 'No language data',
     }),
     defineField({
       name: 'repoCountSuffix',
@@ -120,6 +134,7 @@ export const siteSettings = defineType({
       description: 'Appended after a repo count, e.g. "repos" in "4 repos"',
       type: 'string',
       group: 'techStack',
+      placeholder: 'repos',
     }),
 
     // Popular Repos Card
@@ -128,6 +143,7 @@ export const siteSettings = defineType({
       title: 'Popular Repos Heading',
       type: 'string',
       group: 'popularRepos',
+      placeholder: 'Top Repositories',
     }),
     defineField({
       name: 'popularReposSortLabel',
@@ -135,6 +151,7 @@ export const siteSettings = defineType({
       description: 'e.g. "sorted by ★"',
       type: 'string',
       group: 'popularRepos',
+      placeholder: 'sorted by ★',
     }),
   ],
   preview: {
