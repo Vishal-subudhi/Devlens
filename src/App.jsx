@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import useGithub from './hooks/useGithub'
+import useSiteSettings from './hooks/useSiteSettings'
 import Navbar from './components/Navbar'
 import SearchBar from './components/SearchBar'
 import UserProfile from './components/UserProfile'
@@ -10,17 +11,22 @@ import ErrorMessage from './components/ErrorMessage'
 function App(){
   const [username, setUsername] = useState('')
   const {user, repos, loading, error, fetchUser}= useGithub()
+  const settings = useSiteSettings()
 
   const handleSearch=() => fetchUser(username)
 
   return (
     <div className="min-h-screen bg-base text-white">
-      <Navbar brand="DevLens" links="#"/>
+      <Navbar badgeText={settings.badgeText} navTagline={settings.navTagline} />
     <div className="max-w-6xl mx-auto px-6 py-8">
-      <SearchBar 
+      <SearchBar
       username={username}
       setUsername={setUsername}
       onSearch={handleSearch}
+      heroTitle={settings.heroTitle}
+      heroSubtitle={settings.heroSubtitle}
+      searchPlaceholder={settings.searchPlaceholder}
+      ctaLabel={settings.ctaLabel}
       />
       {loading && <p className="text-center text-gray-400 mt-8">Loading...</p>}
       {error && <ErrorMessage message={error}/>}
